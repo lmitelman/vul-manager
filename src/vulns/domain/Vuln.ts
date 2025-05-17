@@ -56,4 +56,5 @@ export enum VulnStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   SOLVED = 'SOLVED',
   FALSE_POSITIVE = 'FALSE_POSITIVE',
+  OPEN = "OPEN",
 } 
