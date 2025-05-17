@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Vuln } from '@vulns/domain/Vuln';
+import { Vuln } from '@vulns/domain/entities/Vuln';
 import { UpdateVulnDTO } from '@vulns/application/dtos/UpdateVulnDTO';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
 // import { VulnRepository } from '../../domain/vuln.repository';

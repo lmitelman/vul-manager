@@ -1,4 +1,4 @@
-import { VulnSeverity, VulnStatus } from '@vulns/domain/Vuln';
+import { VulnSeverity, VulnStatus } from '@vulns/domain/entities/Vuln';
 
 export class VulnResponseDTO {
   id: string;

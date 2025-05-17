@@ -1,4 +1,4 @@
-import { VulnSeverity } from '@vulns/domain/Vuln';
+import { VulnSeverity } from '@vulns/domain/entities/Vuln';
 
 export class CreateVulnDTO {
   title: string;

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 // import { VulnRepository } from '../../domain/vuln.repository';
-import { Vuln, VulnStatus } from '@vulns/domain/Vuln';
+import { Vuln, VulnStatus } from '@vulns/domain/entities/Vuln';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
 import { v4 as uuidv4 } from 'uuid';

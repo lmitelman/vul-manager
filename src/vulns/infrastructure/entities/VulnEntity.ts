@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Vuln, VulnSeverity, VulnStatus } from '../../domain/Vuln';
+import { Vuln, VulnSeverity, VulnStatus } from '../../domain/entities/Vuln';
 
 @Entity('vulns')
 export class VulnEntity {
