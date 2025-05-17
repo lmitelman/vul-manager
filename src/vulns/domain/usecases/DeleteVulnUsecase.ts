@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-// import { VulnRepository } from '../../domain/vuln.repository';
+import { VulnRepository } from '@vulns/application/repository/VulnRepository';
 
 @Injectable()
 export class DeleteVulnUseCase {
-  constructor(private readonly vulnRepository: any) {}
+  constructor(
+    private readonly vulnRepository: VulnRepository
+  ) {}
 
   async execute(id: string): Promise<void> {
     const vuln = await this.vulnRepository.findById(id);

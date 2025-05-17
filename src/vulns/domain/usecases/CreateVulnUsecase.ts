@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-// import { VulnRepository } from '../../domain/vuln.repository';
 import { Vuln, VulnStatus } from '@vulns/domain/entities/Vuln';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
 import { v4 as uuidv4 } from 'uuid';
+import { VulnRepository } from '@vulns/application/repository/VulnRepository';
+import { VulnEntity } from '@vulns/infrastructure/entities/VulnEntity';
 
 @Injectable()
 export class CreateVulnUseCase {
-  constructor(private readonly vulnRepository: any) {}
+  constructor(
+    private readonly vulnRepository: VulnRepository
+  ) {}
   async execute(dto: CreateVulnDTO): Promise<VulnResponseDTO> {
     const vuln = new Vuln(
       uuidv4(),
@@ -22,7 +25,7 @@ export class CreateVulnUseCase {
       dto.userId
     );
 
-    await this.vulnRepository.save(vuln);
+    await this.vulnRepository.create(VulnEntity.fromDomain(vuln));
     return this.toResponseDto(vuln);
   }
 

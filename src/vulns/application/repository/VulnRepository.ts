@@ -7,4 +7,5 @@ export interface VulnRepository {
   findById(id: string): Promise<VulnEntity | null>;
   updateStatus(id: number, status: VulnStatus): Promise<void>;
   delete(id: string): Promise<void>;
+  save(vuln: VulnEntity): Promise<VulnEntity>;
 }

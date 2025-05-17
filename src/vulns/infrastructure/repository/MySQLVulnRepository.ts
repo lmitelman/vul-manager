@@ -11,6 +11,10 @@ export class MySQLVulnRepository implements VulnRepository {
     @InjectRepository(VulnEntity)
     private readonly repo: Repository<VulnEntity>,
   ) {}
+  
+  async save(vuln: VulnEntity): Promise<VulnEntity> {
+    return this.repo.save(vuln);
+  }
 
   async create(vuln: Partial<VulnEntity>): Promise<VulnEntity> {
     const newVuln = this.repo.create(vuln);
