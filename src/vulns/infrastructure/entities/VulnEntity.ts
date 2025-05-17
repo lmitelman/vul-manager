@@ -41,7 +41,6 @@ export class VulnEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // Mapper methods
   static fromDomain(vuln: Vuln): VulnEntity {
     const entity = new VulnEntity();
     entity.id = vuln.getId();
