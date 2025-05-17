@@ -1,15 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Vuln } from '@vulns/domain/entities/Vuln';
-import { VulnResponseDTO } from '../dtos/VulnResponseDTO';
+import { VulnResponseDTO } from '../../application/dtos/VulnResponseDTO';
 
 @Injectable()
-export class GetVulnUseCase {
+export class ListVulnsUseCase {
   constructor(private readonly vulnRepository: any) {}
 
-  async execute(id: string): Promise<VulnResponseDTO> {
-    const vuln = await this.vulnRepository.findById(id);
-    if (!vuln) throw new NotFoundException(`Vulnerability with ID ${id} not found`);
-    return this.toResponseDto(vuln);
+  async execute(): Promise<VulnResponseDTO[]> {
+    const vulns = await this.vulnRepository.findAll();
+    return vulns.map((vuln: Vuln) => this.toResponseDto(vuln));
   }
 
   private toResponseDto(vuln: Vuln): VulnResponseDTO {

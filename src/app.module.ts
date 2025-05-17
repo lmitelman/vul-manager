@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { getTypeOrmConfig } from './config/typeorm.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { VulnController } from '@vulns/infrastructure/controllers/VulnController';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { AppService } from './app.service';
       useFactory: getTypeOrmConfig,
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, VulnController],
   providers: [AppService],
 })
 export class AppModule {}
