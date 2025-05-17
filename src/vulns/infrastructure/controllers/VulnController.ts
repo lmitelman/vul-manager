@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode } from '@nestjs/common';
-import { CreateVulnUseCase } from '@vulns/domain/usecases/CreateVulnUseCase';
-import { UpdateVulnUseCase } from '@vulns/domain/usecases/UpdateVulnUsecase';
-import { GetVulnUseCase } from '@vulns/domain/usecases/GetVulnUseCase';
-import { ListVulnsUseCase } from '@vulns/domain/usecases/ListVulnsUseCase';
-import { DeleteVulnUseCase } from '@vulns/domain/usecases/DeleteVulnUseCase';
+import { DeleteVulnUseCase } from '../../application/usecases/DeleteVulnUseCase';
+import { GetVulnUseCase } from '../../application/usecases/GetVulnUseCase';
+import { UpdateVulnUseCase } from '../../application/usecases/UpdateVulnUseCase';
+import { CreateVulnUseCase } from '../../application/usecases/CreateVulnUseCase';
+import { ListVulnsUseCase } from '../../application/usecases/ListVulnsUseCase';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
 import { UpdateVulnDTO } from '@vulns/application/dtos/UpdateVulnDTO';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
