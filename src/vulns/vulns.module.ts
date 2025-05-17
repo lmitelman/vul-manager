@@ -11,13 +11,13 @@ import { CreateVulnUseCase } from './domain/usecases/CreateVulnUseCase';
 import { ListVulnsUseCase } from './domain/usecases/ListVulnsUseCase';
 
 const providers = ProviderLoader([
-  VulnController,
   DeleteVulnUseCase,
   ListVulnsUseCase,
   MySQLVulnRepository,
   GetVulnUseCase,
   UpdateVulnUseCase,
   CreateVulnUseCase,
+  VulnController,
 ]);
 
 @Module({

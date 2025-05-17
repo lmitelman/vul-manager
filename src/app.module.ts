@@ -15,8 +15,9 @@ import { VulnsModule } from '@vulns/vulns.module';
       inject: [ConfigService],
       useFactory: getTypeOrmConfig,
     }),
+    VulnsModule
   ],
-  controllers: [AppController, VulnsModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
