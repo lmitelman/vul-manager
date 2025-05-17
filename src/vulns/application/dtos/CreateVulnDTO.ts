@@ -4,4 +4,7 @@ export class CreateVulnDTO {
   title: string;
   description: string;
   severity: VulnSeverity;
+  cweId: string;
+  suggestedFix: string;
+  userId: string;
 } 

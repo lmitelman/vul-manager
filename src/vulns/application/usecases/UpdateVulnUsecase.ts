@@ -37,6 +37,8 @@ export class UpdateVulnUseCase {
       status: vuln.getStatus(),
       createdAt: vuln.getCreatedAt(),
       updatedAt: vuln.getUpdatedAt(),
+      cweId: vuln.getCweId(),
+      suggestedFix: vuln.getSuggestedFix(),
     };
   }
 } 

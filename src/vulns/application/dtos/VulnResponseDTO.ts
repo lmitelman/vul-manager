@@ -8,4 +8,6 @@ export class VulnResponseDTO {
   status: VulnStatus;
   createdAt: Date;
   updatedAt: Date;
+  cweId: string;
+  suggestedFix: string;
 } 

@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Vuln, VulnSeverity, VulnStatus } from '../../domain/entities/Vuln';
+import { Vuln, VulnSeverity, VulnStatus } from '@vulns/domain/entities/Vuln';
 
 @Entity('vulns')
 export class VulnEntity {
@@ -29,6 +29,9 @@ export class VulnEntity {
   @Column()
   cweId: string;
 
+  @Column()
+  userId: string;
+
   @Column('text')
   suggestedFix: string;
 
@@ -47,6 +50,7 @@ export class VulnEntity {
     entity.severity = vuln.getSeverity();
     entity.status = vuln.getStatus();
     entity.cweId = vuln.getCweId();
+    entity.userId = vuln.getUserId();
     entity.suggestedFix = vuln.getSuggestedFix();
     entity.createdAt = vuln.getCreatedAt();
     entity.updatedAt = vuln.getUpdatedAt();
@@ -63,7 +67,8 @@ export class VulnEntity {
       this.createdAt,
       this.updatedAt,
       this.cweId,
-      this.suggestedFix
+      this.suggestedFix,
+      this.userId
     );
   }
 } 

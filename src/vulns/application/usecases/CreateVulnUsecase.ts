@@ -14,11 +14,12 @@ export class CreateVulnUseCase {
       dto.title,
       dto.description,
       dto.severity,
-      VulnStatus.OPEN,
+      VulnStatus.PENDING_FIX,
       new Date(),
       new Date(),
-      null,
-      null
+      dto.cweId,
+      dto.suggestedFix,
+      dto.userId
     );
 
     await this.vulnRepository.save(vuln);
@@ -34,6 +35,8 @@ export class CreateVulnUseCase {
       status: vuln.getStatus(),
       createdAt: vuln.getCreatedAt(),
       updatedAt: vuln.getUpdatedAt(),
+      cweId: vuln.getCweId(),
+      suggestedFix: vuln.getSuggestedFix(),
     };
   }
 } 

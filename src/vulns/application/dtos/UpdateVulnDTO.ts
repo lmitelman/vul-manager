@@ -5,4 +5,6 @@ export class UpdateVulnDTO {
   description?: string;
   severity?: VulnSeverity;
   status?: VulnStatus;
+  cweId?: string;
+  suggestedFix?: string;
 } 

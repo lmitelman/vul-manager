@@ -9,9 +9,9 @@ export class Vuln {
     private updatedAt: Date,
     private cweId: string,
     private suggestedFix: string,
+    private userId: string,
   ) {}
 
-  // Getters
   getId(): string { return this.id; }
   getTitle(): string { return this.title; }
   getDescription(): string { return this.description; }
@@ -21,8 +21,8 @@ export class Vuln {
   getUpdatedAt(): Date { return this.updatedAt; }
   getCweId(): string { return this.cweId; }
   getSuggestedFix(): string { return this.suggestedFix; }
+  getUserId(): string { return this.userId; }
 
-  // Business methods
   updateDetails(
     title: string, 
     description: string, 
@@ -56,5 +56,4 @@ export enum VulnStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   SOLVED = 'SOLVED',
   FALSE_POSITIVE = 'FALSE_POSITIVE',
-  OPEN = "OPEN",
 } 

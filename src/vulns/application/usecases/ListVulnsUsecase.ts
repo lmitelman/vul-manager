@@ -8,7 +8,7 @@ export class ListVulnsUseCase {
 
   async execute(): Promise<VulnResponseDTO[]> {
     const vulns = await this.vulnRepository.findAll();
-    return vulns.map(vuln => this.toResponseDto(vuln));
+    return vulns.map((vuln: Vuln) => this.toResponseDto(vuln));
   }
 
   private toResponseDto(vuln: Vuln): VulnResponseDTO {
@@ -20,6 +20,8 @@ export class ListVulnsUseCase {
       status: vuln.getStatus(),
       createdAt: vuln.getCreatedAt(),
       updatedAt: vuln.getUpdatedAt(),
+      cweId: vuln.getCweId(),
+      suggestedFix: vuln.getSuggestedFix(),
     };
   }
 } 
