@@ -13,6 +13,10 @@ import { ListVulnsUseCase } from './application/usecases/ListVulnsUseCase';
   imports: [TypeOrmModule.forFeature([VulnEntity])],
   controllers: [VulnController],
   providers: [
+    {
+      provide: 'VulnRepository', 
+      useClass: MySQLVulnRepository,
+    },
     VulnController,
     DeleteVulnUseCase,
     ListVulnsUseCase,

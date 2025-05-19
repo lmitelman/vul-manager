@@ -8,7 +8,7 @@ import { VulnEntity } from '@vulns/infrastructure/entities/VulnEntity';
 @Injectable()
 export class UpdateVulnUseCase {
   constructor(
-    @Inject('MySQLVulnRepository') private readonly vulnRepository: VulnRepository
+    @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
 
   async execute(id: string, dto: UpdateVulnDTO): Promise<VulnResponseDTO> {

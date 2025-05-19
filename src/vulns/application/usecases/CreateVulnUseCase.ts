@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Vuln, VulnStatus } from '@vulns/domain/entities/Vuln';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
@@ -9,7 +9,7 @@ import { VulnEntity } from '@vulns/infrastructure/entities/VulnEntity';
 @Injectable()
 export class CreateVulnUseCase {
   constructor(
-    private readonly vulnRepository: VulnRepository
+    @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
   async execute(dto: CreateVulnDTO): Promise<VulnResponseDTO> {
     const vuln = new Vuln(

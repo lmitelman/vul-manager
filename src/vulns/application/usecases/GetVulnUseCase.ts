@@ -6,7 +6,7 @@ import { VulnRepository } from '@vulns/application/repository/VulnRepository';
 @Injectable()
 export class GetVulnUseCase {
   constructor(
-    @Inject('MySQLVulnRepository') private readonly vulnRepository: VulnRepository
+    @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
 
   async execute(id: string): Promise<VulnResponseDTO> {
