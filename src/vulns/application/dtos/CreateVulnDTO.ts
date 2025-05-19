@@ -1,4 +1,4 @@
-import { VulnSeverity } from '@vulns/domain/entities/Vuln';
+import { VulnSeverity, VulnStatus } from '@vulns/domain/entities/Vuln';
 
 export class CreateVulnDTO {
   title: string;
@@ -7,4 +7,5 @@ export class CreateVulnDTO {
   cweId: string;
   suggestedFix: string;
   userId: string;
+  status: VulnStatus;
 } 
