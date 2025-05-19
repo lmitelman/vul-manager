@@ -10,7 +10,7 @@ import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
 import { CreateVulnRequest as CreateVulnRequestBody } from './requests/CreateVulnRequestBody';
 import { VulnStatus } from '@vulns/domain/entities/Vuln';
 
-@Controller('vulns')
+@Controller('api/vulns')
 export class VulnController {
   constructor(
     private readonly createVulnUseCase: CreateVulnUseCase,
