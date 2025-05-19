@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Vuln } from '@vulns/domain/entities/Vuln';
 import { UpdateVulnDTO } from '@vulns/application/dtos/UpdateVulnDTO';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
@@ -7,7 +7,9 @@ import { VulnEntity } from '@vulns/infrastructure/entities/VulnEntity';
 
 @Injectable()
 export class UpdateVulnUseCase {
-  constructor(private readonly vulnRepository: VulnRepository) {}
+  constructor(
+    @Inject('MySQLVulnRepository') private readonly vulnRepository: VulnRepository
+  ) {}
 
   async execute(id: string, dto: UpdateVulnDTO): Promise<VulnResponseDTO> {
     const vulnEntity = await this.vulnRepository.findById(id);
