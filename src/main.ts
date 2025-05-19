@@ -7,12 +7,12 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:3000',                // dev frontend
-      'https://your-next-app.vercel.app',     // production frontend
+      'http://localhost:3000',
+      'https://vul-manager-frontend.up.railway.app',
     ],
-    credentials: true, // if you're using cookies or auth headers
+    credentials: true,
   });
-  
+
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
