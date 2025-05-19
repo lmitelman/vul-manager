@@ -17,6 +17,6 @@ export const getTypeOrmConfig = (configService: ConfigService): TypeOrmModuleOpt
     username: configService.get<string>('MYSQLUSER'),
     password: configService.get<string>('MYSQLPASSWORD'),
     database: configService.get<string>('MYSQLDATABASE'),
-    entities: [__dirname + '/../**/infrastructure/entities/**/*.ts']
+    entities: [__dirname + '/../**/infrastructure/entities/*.{js,ts}']
   };
 };
