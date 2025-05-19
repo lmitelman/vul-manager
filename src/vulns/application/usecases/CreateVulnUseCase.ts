@@ -11,6 +11,7 @@ export class CreateVulnUseCase {
   constructor(
     @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
+  
   async execute(dto: CreateVulnDTO): Promise<VulnResponseDTO> {
     const vuln = new Vuln(
       uuidv4(),
