@@ -33,6 +33,6 @@ export class MySQLVulnRepository implements VulnRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.repo.delete(Number(id));
+    await this.repo.delete(id);
   }
 }

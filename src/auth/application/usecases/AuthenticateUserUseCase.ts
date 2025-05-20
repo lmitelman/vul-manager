@@ -13,8 +13,6 @@ export class AuthenticateUserUseCase {
     const adminEmail = this.configService.get('ADMIN_EMAIL');
     const adminPassword = this.configService.get('ADMIN_PASSWORD');
 
-    console.log(adminEmail, adminPassword);
-
     const isValidCredentials = 
       body.email === adminEmail && 
       body.password === adminPassword;
