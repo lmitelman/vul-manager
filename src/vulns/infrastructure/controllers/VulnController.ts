@@ -1,11 +1,10 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/infrastructure/guards/AuthGuard';
-import { DeleteVulnUseCase } from '../../application/usecases/DeleteVulnUseCase';
+import { JwtAuthGuard } from '@auth/infrastructure/guards/AuthGuard';
+import { DeleteVulnUseCase } from '@vulns/application/usecases/DeleteVulnUseCase';
 import { GetVulnUseCase } from '@vulns/application/usecases/GetVulnUseCase';
 import { UpdateVulnUseCase } from '@vulns/application/usecases/UpdateVulnUseCase';
 import { CreateVulnUseCase } from '@vulns/application/usecases/CreateVulnUseCase';
 import { ListVulnsUseCase } from '@vulns/application/usecases/ListVulnsUseCase';
-import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
 import { CreateVulnRequestBody } from '@vulns/infrastructure/controllers/requests/CreateVulnRequestBody';
 import { VulnStatus } from '@vulns/domain/entities/Vuln';

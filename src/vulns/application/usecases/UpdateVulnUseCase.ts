@@ -13,9 +13,12 @@ export class UpdateVulnUseCase {
 
   async execute(id: string, dto: UpdateVulnDTO): Promise<Vuln> {
     const vulnEntity = await this.vulnRepository.findById(id);
+    if (!vulnEntity) {
+      throw new NotFoundException(`Vulnerability with ID ${id} not found`);
+    }
+    
     const vuln = vulnEntity.toDomain();
-    if (!vuln) throw new NotFoundException(`Vulnerability with ID ${id} not found`);
-
+    
     if (dto.title || dto.description || dto.severity) {
       vuln.updateDetails(
         dto.title ?? vuln.getTitle(),
