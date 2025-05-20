@@ -12,6 +12,31 @@
 
 **Vuln Manager API** is a backend service designed to manage software vulnerabilities throughout their lifecycle. It provides a RESTful interface for creating, updating, and tracking vulnerabilities using a Jira-style workflow.
 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#architecture">Architecture</a>
+      <ul>
+        <li><a href="#tech-stack">Tech Stack</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#api-reference">API Reference</a>
+      <ul>
+        <li><a href="#authentication">Authentication</a></li>
+        <li><a href="#get-all-vulnerabilities">Get All Vulnerabilities</a></li>
+        <li><a href="#get-single-vulnerability">Get Single Vulnerability</a></li>
+        <li><a href="#create-vulnerability">Create Vulnerability</a></li>
+        <li><a href="#update-vulnerability">Update Vulnerability</a></li>
+        <li><a href="#delete-vulnerability">Delete Vulnerability</a></li>
+      </ul>
+    </li>
+    <li><a href="#server-demo">Server Demo</a></li>
+    <li><a href="#client-demo">Client Demo</a></li>
+  </ol>
+</details>
+
 ## Architecture
 The project follows a Clean Architecture approach combined with principles from Domain-Driven Design (DDD). This architecture separates the system into well-defined layers with a specific responsibility. It promotes modularity, testability, and long-term maintainability by isolating business logic from framework-specific code and defining boundaries between components.
 
@@ -62,7 +87,6 @@ This structure brings several benefits:
 
 
 
-
 ## API Reference
 
 ### Authentication
@@ -89,6 +113,7 @@ POST /auth/login
 }
 ```
 
+---
 ### Get All Vulnerabilities
 ```http
 GET /api/vulns
@@ -112,6 +137,7 @@ GET /api/vulns
 ]
 ```
 
+---
 ### Get Single Vulnerability
 ```http
 GET /api/vulns/${id}
@@ -137,6 +163,7 @@ GET /api/vulns/${id}
 }
 ```
 
+---
 ### Create Vulnerability
 
 ```http
@@ -182,6 +209,7 @@ PUT /api/vulns/${id}
 }
 ```
 
+---
 ### Update Vulnerability
 
 ```http
@@ -205,6 +233,7 @@ PUT /api/vulns/${id}
 }
 ```
 
+---
 ### Delete Vulnerability
 
 ```http
