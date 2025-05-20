@@ -8,7 +8,9 @@ import { GetVulnUseCase } from './application/usecases/GetVulnUseCase';
 import { UpdateVulnUseCase } from './application/usecases/UpdateVulnUseCase';
 import { CreateVulnUseCase } from './application/usecases/CreateVulnUseCase';
 import { ListVulnsUseCase } from './application/usecases/ListVulnsUseCase';
-
+import CreateVulnPresenter from './infrastructure/presenters/CreateVulnPresenter';
+import UpdateVulnPresenter from './infrastructure/presenters/UpdateVulnPresenter';  
+import GetVulnPresenter from './infrastructure/presenters/GetVulnPresenter';
 @Module({
   imports: [TypeOrmModule.forFeature([VulnEntity])],
   controllers: [VulnController],
@@ -24,6 +26,9 @@ import { ListVulnsUseCase } from './application/usecases/ListVulnsUseCase';
     GetVulnUseCase,
     UpdateVulnUseCase,
     CreateVulnUseCase,
+    CreateVulnPresenter,
+    UpdateVulnPresenter,
+    GetVulnPresenter,
   ],
   exports: [
     VulnController,
@@ -33,6 +38,9 @@ import { ListVulnsUseCase } from './application/usecases/ListVulnsUseCase';
     GetVulnUseCase,
     UpdateVulnUseCase,
     CreateVulnUseCase,
+    CreateVulnPresenter,
+    UpdateVulnPresenter,
+    GetVulnPresenter,
   ],
 })
 export class VulnsModule {}

@@ -9,22 +9,8 @@ export class ListVulnsUseCase {
     @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
 
-  async execute(): Promise<VulnResponseDTO[]> {
+  async execute(): Promise<Vuln[]> {
     const vulns = await this.vulnRepository.findAll();
-    return vulns.map((vuln) => this.toResponseDto(vuln.toDomain()));
-  }
-
-  private toResponseDto(vuln: Vuln): VulnResponseDTO {
-    return {
-      id: vuln.getId(),
-      title: vuln.getTitle(),
-      description: vuln.getDescription(),
-      severity: vuln.getSeverity(),
-      status: vuln.getStatus(),
-      createdAt: vuln.getCreatedAt(),
-      updatedAt: vuln.getUpdatedAt(),
-      cweId: vuln.getCweId(),
-      suggestedFix: vuln.getSuggestedFix(),
-    };
+    return vulns.map((vuln) => vuln.toDomain());
   }
 } 

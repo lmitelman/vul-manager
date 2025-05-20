@@ -11,7 +11,7 @@ export class UpdateVulnUseCase {
     @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
 
-  async execute(id: string, dto: UpdateVulnDTO): Promise<VulnResponseDTO> {
+  async execute(id: string, dto: UpdateVulnDTO): Promise<Vuln> {
     const vulnEntity = await this.vulnRepository.findById(id);
     const vuln = vulnEntity.toDomain();
     if (!vuln) throw new NotFoundException(`Vulnerability with ID ${id} not found`);
@@ -31,20 +31,6 @@ export class UpdateVulnUseCase {
     }
 
     await this.vulnRepository.save(VulnEntity.fromDomain(vuln));
-    return this.toResponseDto(vuln);
-  }
-
-  private toResponseDto(vuln: Vuln): VulnResponseDTO {
-    return {
-      id: vuln.getId(),
-      title: vuln.getTitle(),
-      description: vuln.getDescription(),
-      severity: vuln.getSeverity(),
-      status: vuln.getStatus(),
-      createdAt: vuln.getCreatedAt(),
-      updatedAt: vuln.getUpdatedAt(),
-      cweId: vuln.getCweId(),
-      suggestedFix: vuln.getSuggestedFix(),
-    };
+    return vuln;
   }
 } 

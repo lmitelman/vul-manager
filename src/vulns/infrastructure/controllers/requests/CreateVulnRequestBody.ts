@@ -1,7 +1,7 @@
 import { VulnSeverity } from '@vulns/domain/entities/Vuln';
 import { IsString, IsNotEmpty, IsEnum, Matches, MinLength, MaxLength } from 'class-validator';
 
-export class CreateVulnRequest {
+export class CreateVulnRequestBody {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)

@@ -1,16 +1,21 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, Req } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/infrastructure/guards/AuthGuard';
 import { DeleteVulnUseCase } from '../../application/usecases/DeleteVulnUseCase';
 import { GetVulnUseCase } from '@vulns/application/usecases/GetVulnUseCase';
 import { UpdateVulnUseCase } from '@vulns/application/usecases/UpdateVulnUseCase';
 import { CreateVulnUseCase } from '@vulns/application/usecases/CreateVulnUseCase';
 import { ListVulnsUseCase } from '@vulns/application/usecases/ListVulnsUseCase';
 import { VulnResponseDTO } from '@vulns/application/dtos/VulnResponseDTO';
-import { UpdateVulnDTO } from '@vulns/application/dtos/UpdateVulnDTO';
 import { CreateVulnDTO } from '@vulns/application/dtos/CreateVulnDTO';
-import { CreateVulnRequest as CreateVulnRequestBody } from './requests/CreateVulnRequestBody';
+import { CreateVulnRequestBody } from '@vulns/infrastructure/controllers/requests/CreateVulnRequestBody';
 import { VulnStatus } from '@vulns/domain/entities/Vuln';
-
+import { UpdateVulnRequestBody } from '@vulns/infrastructure/controllers/requests/UpdateVulnRequestBody';
+import { UpdateVulnDTO } from '@vulns/application/dtos/UpdateVulnDTO';
+import CreateVulnPresenter, { CreateVulnPresented } from '@vulns/infrastructure/presenters/CreateVulnPresenter';
+import UpdateVulnPresenter, { UpdateVulnPresented } from '@vulns/infrastructure/presenters/UpdateVulnPresenter';
+import GetVulnPresenter, { GetVulnPresented } from '@vulns/infrastructure/presenters/GetVulnPresenter';
 @Controller('api/vulns')
+@UseGuards(JwtAuthGuard)
 export class VulnController {
   constructor(
     private readonly createVulnUseCase: CreateVulnUseCase,
@@ -18,40 +23,55 @@ export class VulnController {
     private readonly getVulnUseCase: GetVulnUseCase,
     private readonly listVulnsUseCase: ListVulnsUseCase,
     private readonly deleteVulnUseCase: DeleteVulnUseCase,
+    private readonly createVulnPresenter: CreateVulnPresenter,
+    private readonly updateVulnPresenter: UpdateVulnPresenter,
+    private readonly getVulnPresenter: GetVulnPresenter
   ) {}
 
   @Post()
   async create(
-    @Body() req: CreateVulnRequestBody,
-  ): Promise<VulnResponseDTO> {
+    @Body() body: CreateVulnRequestBody,
+  ): Promise<CreateVulnPresented> {
     const dto: CreateVulnDTO = {
-      title: req.title,
-      description: req.description,
-      severity: req.severity,
+      title: body.title,
+      description: body.description,
+      severity: body.severity,
       status: VulnStatus.PENDING_FIX,
-      cweId: req.cweId,
-      suggestedFix: req.suggestedFix,
+      cweId: body.cweId,
+      suggestedFix: body.suggestedFix,
       userId: "123"
     }
-    return this.createVulnUseCase.execute(dto);
+    const vuln = await this.createVulnUseCase.execute(dto);
+    return this.createVulnPresenter.present(vuln);
   }
 
   @Get()
-  async findAll(): Promise<VulnResponseDTO[]> {
-    return this.listVulnsUseCase.execute();
+  async findAll(): Promise<GetVulnPresented[]> {
+    const vulns = await this.listVulnsUseCase.execute();
+    return vulns.map(vuln => this.getVulnPresenter.present(vuln));
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<VulnResponseDTO> {
-    return this.getVulnUseCase.execute(id);
+  async findOne(@Param('id') id: string): Promise<GetVulnPresented> {
+    const vuln = await this.getVulnUseCase.execute(id);
+    return this.getVulnPresenter.present(vuln);
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() dto: UpdateVulnDTO
-  ): Promise<VulnResponseDTO> {
-    return this.updateVulnUseCase.execute(id, dto);
+    @Body() body: UpdateVulnRequestBody
+  ): Promise<UpdateVulnPresented> {
+    const dto: UpdateVulnDTO = {
+      title: body.title,
+      description: body.description,
+      severity: body.severity,
+      status: body.status,
+      cweId: body.cweId,
+      suggestedFix: body.suggestedFix,
+    }
+    const vuln = await this.updateVulnUseCase.execute(id, dto);
+    return this.updateVulnPresenter.present(vuln);
   }
 
   @Delete(':id')

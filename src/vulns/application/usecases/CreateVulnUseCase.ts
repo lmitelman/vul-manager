@@ -12,7 +12,7 @@ export class CreateVulnUseCase {
     @Inject('VulnRepository') private readonly vulnRepository: VulnRepository
   ) {}
   
-  async execute(dto: CreateVulnDTO): Promise<VulnResponseDTO> {
+  async execute(dto: CreateVulnDTO): Promise<Vuln> {
     const vuln = new Vuln(
       `vuln-${uuidv4()}`,
       dto.title,
@@ -27,20 +27,6 @@ export class CreateVulnUseCase {
     );
 
     await this.vulnRepository.create(VulnEntity.fromDomain(vuln));
-    return this.toResponseDto(vuln);
-  }
-
-  private toResponseDto(vuln: Vuln): VulnResponseDTO {
-    return {
-      id: vuln.getId(),
-      title: vuln.getTitle(),
-      description: vuln.getDescription(),
-      severity: vuln.getSeverity(),
-      status: vuln.getStatus(),
-      createdAt: vuln.getCreatedAt(),
-      updatedAt: vuln.getUpdatedAt(),
-      cweId: vuln.getCweId(),
-      suggestedFix: vuln.getSuggestedFix(),
-    };
+    return vuln
   }
 } 
