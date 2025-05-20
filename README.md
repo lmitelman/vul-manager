@@ -79,8 +79,13 @@ POST /auth/login
 #### Response:
 ```typescript
 {
-  id: string
-  createdAt: Date
+  "user":
+    {
+      "username": string,
+      "id": string,
+      "email": string
+    },
+  "accessToken": string
 }
 ```
 
@@ -239,7 +244,8 @@ curl -X POST https://vul-manager.up.railway.app/vulns \
 
 A companion frontend application built with **Next.js** is available to interact with this API.
 
-🔗 **[https://vul-manager-frontend.up.railway.app/login](https://vul-manager-frontend.up.railway.app/login)**
+🔗 **Live App:** [https://vul-manager-frontend.up.railway.app](https://vul-manager-frontend.up.railway.app)  
+📁 **Source Code:** [github.com/lmitelman/vul-manager-frontend](https://github.com/lmitelman/vul-manager-frontend)
 
 <img src="./src/images/screenshot.png" alt="screenshot">
 
