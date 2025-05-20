@@ -30,6 +30,7 @@ export class AuthenticateUserUseCase {
     
     return {
       user: {
+        username: body.email.split('.')[0].charAt(0).toUpperCase() + body.email.split('.')[0].slice(1),
         id: payload.sub,
         email: payload.email,
       },

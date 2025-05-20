@@ -14,7 +14,7 @@ export class CreateVulnUseCase {
   
   async execute(dto: CreateVulnDTO): Promise<VulnResponseDTO> {
     const vuln = new Vuln(
-      uuidv4(),
+      `vuln-${uuidv4()}`,
       dto.title,
       dto.description,
       dto.severity,
