@@ -23,8 +23,18 @@ export class AuthenticateUserUseCase {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { email: body.email, sub: 'usr-1' };
+    const payload = { 
+      email: body.email, 
+      sub: 'usr-1',
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // 24 hour expiration
+    };
+    
     return {
+      user: {
+        id: payload.sub,
+        email: payload.email,
+      },
       accessToken: this.jwtService.sign(payload),
     };
   }
