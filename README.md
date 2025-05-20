@@ -1,9 +1,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="https://cdn.prod.website-files.com/661f1186a2fe0a147b01a1c0/6621b7759da74c78a453e9d7_Logo%20-%20strike.svg" alt="Logo" width="200" height="100">
+    <img src="https://cdn.prod.website-files.com/661f1186a2fe0a147b01a1c0/6621b7759da74c78a453e9d7_Logo%20-%20strike.svg" alt="Logo" width="200">
   </a>
 
+</br>
 <h1 align="center">Vuln Manager API</h1>
 
  
@@ -41,7 +42,6 @@ vuln-manager/
 │   ├── config/               # Global app configuration
 │   ├── main.ts               # NestJS app entrypoint
 │   └── app.module.ts         # Root application module
-
 ```
 This structure brings several benefits:
 
