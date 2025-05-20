@@ -1,73 +1,251 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+<br />
+<div align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="https://cdn.prod.website-files.com/661f1186a2fe0a147b01a1c0/6621b7759da74c78a453e9d7_Logo%20-%20strike.svg" alt="Logo" width="200" height="100">
+  </a>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="center">Vuln Manager API</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+ 
+</div>
 
-## Description
+**Vuln Manager API** is a backend service designed to manage software vulnerabilities throughout their lifecycle. It provides a RESTful interface for creating, updating, and tracking vulnerabilities using a Jira-style workflow.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Architecture
+The project follows a Clean Architecture approach combined with principles from Domain-Driven Design (DDD). This architecture separates the system into well-defined layers with a specific responsibility. It promotes modularity, testability, and long-term maintainability by isolating business logic from framework-specific code and defining boundaries between components.
 
-## Installation
+```
+vuln-manager/
+│
+├── src/
+│   ├── vulns/                # Bounded context: Vulnerabilities
+│   │   ├── application/
+│   │   │   ├── usecases/     # Core business logic
+│   │   │   └── repository/   # Repository interface 
+│   │   ├── domain/
+│   │   │   └── entities/     # Domain models
+│   │   ├── infrastructure/
+│   │   │   ├── entities/     # ORM entities (TypeORM)
+│   │   │   ├── repository/   # Concrete implementation
+│   │   │   ├── controllers/  # HTTP entrypoints
+│   │   │   └── presenters/   # Formatters for HTTP responses
+│   │   └── vulns.module.ts
+│   ├── auth/                 # Bounded context: Authentication
+│   │   ├── application/
+│   │   │   ├── strategies/   # JWT strategies (PassportJS)
+│   │   │   └── usecases/     # Authentication-specific logic
+│   │   ├── infrastructure/
+│   │   │   ├── controllers/  # Auth-related endpoints
+│   │   │   └── guards/       # NestJS guards for protecting routes
+│   │   └── auth.module.ts
+│   ├── config/               # Global app configuration
+│   ├── main.ts               # NestJS app entrypoint
+│   └── app.module.ts         # Root application module
 
-```bash
-$ npm install
+```
+This structure brings several benefits:
+
+- **Separation of Concerns**: The architecture clearly separates the domain, application, and infrastructure layers, allowing each to evolve independently and improving long-term maintainability.
+
+- **Testability**: By isolating business rules from external concerns, the core logic can be unit tested in isolation, leading to faster, more reliable test feedback loops.
+
+- **Flexibility**: Leveraging _Dependency Injection_ and _Inversion of Control_, the system decouples business logic from frameworks and infrastructure. This enables seamless replacement of components like databases, web servers, or authentication strategies without impacting core functionality.
+
+- **Alignment with DDD**: The structure follows _Domain-Driven Design_ principles by organizing code around meaningful business concepts using _Entities_, _Repositories_, and a _Ubiquitous Language_, ensuring the domain model remains expressive and independent of technical details.
+## Tech Stack
+
+- **[NestJS](https://nestjs.com/):** A progressive Node.js framework for building efficient and scalable server-side applications.
+- **[TypeORM](https://typeorm.io/):** An ORM that supports TypeScript and enables easy interaction with relational databases.
+- **MySQL:** A reliable relational database used to store and manage vulnerability data.
+- **[Passport.js](https://www.passportjs.org/):** Middleware for handling authentication, integrated with NestJS for JWT-based security.
+- **[Railway](https://railway.app/):** A cloud platform used to deploy the API and manage the MySQL database in a streamlined DevOps workflow.
+
+
+
+
+## API Reference
+
+### Authentication
+
+```http
+POST /auth/login
 ```
 
-## Running the app
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | **Required**. User email |
+| `password` | `string` | **Required**. User password |
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+#### Response:
+```typescript
+{
+  id: string
+  createdAt: Date
+}
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### Get All Vulnerabilities
+```http
+GET /api/vulns
 ```
 
-## Support
+#### Response:
+```typescript
+[
+  {
+    id: string,
+    createdAt: Date,
+    updatedAt: Date,
+    title: string,
+    description: string,
+    severity: string,
+    status: string,
+    cweId: string,
+    suggestedFix: string,
+    userId: string,
+  }
+]
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Get Single Vulnerability
+```http
+GET /api/vulns/${id}
+```
 
-## Stay in touch
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of vulnerability to fetch |
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Response:
+```typescript
+{
+  id: string,
+  createdAt: Date,
+  updatedAt: Date,
+  title: string,
+  description: string,
+  severity: string,
+  status: string,
+  cweId: string,
+  suggestedFix: string,
+  userId: string,
+}
+```
 
-## License
+### Create Vulnerability
 
-Nest is [MIT licensed](LICENSE).
+```http
+POST /api/vulns
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title` | `string` | **Required**. Title (3-100 chars) |
+| `description` | `string` | **Required**. Description (min 10 chars) |
+| `severity` | `enum` | **Required**. Vulnerability severity |
+| `cweId` | `string` | **Required**. CWE ID (numeric) |
+| `suggestedFix` | `string` | **Required**. Suggested fix (min 10 chars) |
+
+#### Response:
+```typescript
+{
+  id: string,
+  createdAt: Date,
+}
+```
+
+### Update Vulnerability
+
+```http
+PUT /api/vulns/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title` | `string` | **Optional**. Title (3-100 chars) |
+| `description` | `string` | **Optional**. Description (min 10 chars) |
+| `severity` | `enum` | **Optional**. Vulnerability severity |
+| `status` | `enum` | **Optional**. Vulnerability status |
+| `cweId` | `string` | **Optional**. CWE ID (numeric) |
+| `suggestedFix` | `string` | **Optional**. Suggested fix (min 10 chars) |
+
+#### Response:
+```typescript
+{
+  id: string,
+  updatedAt: Date,
+}
+```
+
+### Update Vulnerability
+
+```http
+PUT /api/vulns/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title` | `string` | **Optional**. Title (3-100 chars) |
+| `description` | `string` | **Optional**. Description (min 10 chars) |
+| `severity` | `enum` | **Optional**. Vulnerability severity |
+| `status` | `enum` | **Optional**. Vulnerability status |
+| `cweId` | `string` | **Optional**. CWE ID (numeric) |
+| `suggestedFix` | `string` | **Optional**. Suggested fix (min 10 chars) |
+
+#### Response:
+```typescript
+{
+  id: string,
+  updatedAt: Date,
+}
+```
+
+### Delete Vulnerability
+
+```http
+DELETE /api/vulns/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id` | `string` | **Required**. Id of vulnerability to delete |
+
+#### Response: 
+`Status 204`
+
+## Server Demo
+
+A live version of the API is deployed on Railway and accessible at the following URL:
+
+🔗 **[https://vul-manager.up.railway.app](https://vul-manager.up.railway.app)**
+
+You can use this url to interact with the service and test features like vulnerability creation, listing, and status updates.
+
+```bash
+curl -X POST https://vul-manager.up.railway.app/vulns \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <your-jwt-token>" \
+  -d '{
+    "title": "Example SQL Injection",
+    "description": "Demo vulnerability description.",
+    "severity": "HIGH",
+    "status": "PENDING_FIX",
+    "cweId": "89",
+    "suggestedFix": "Use prepared statements."
+  }'
+```
+
+## Client Demo
+
+A companion frontend application built with **Next.js** is available to interact with this API.
+
+🔗 **[https://vul-manager-frontend.up.railway.app/login](https://vul-manager-frontend.up.railway.app/login)**
+
+<img src="./src/images/screenshot.png" alt="screenshot">
+
+This UI provides a basic interface to authenticate and manage vulnerabilities through the API.
+
+> 🙏🏻 Note: The frontend was built primarily for demonstration purposes. While functional, it may not reflect production-level frontend practices, as frontend development is not my primary area of expertise.
+
+
+
