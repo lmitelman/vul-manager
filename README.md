@@ -15,12 +15,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#architecture">Architecture</a>
-      <ul>
-        <li><a href="#tech-stack">Tech Stack</a></li>
-      </ul>
-    </li>
+    <li><a href="#architecture">Architecture</a></li> 
+    <li><a href="#tech-stack">Tech Stack</a></li> 
+    <li><a href="#conventional-commits">Conventional Commits</a></li> 
     <li>
       <a href="#api-reference">API Reference</a>
       <ul>
@@ -77,6 +74,7 @@ This structure brings several benefits:
 - **Flexibility**: Leveraging _Dependency Injection_ and _Inversion of Control_, the system decouples business logic from frameworks and infrastructure. This enables seamless replacement of components like databases, web servers, or authentication strategies without impacting core functionality.
 
 - **Alignment with DDD**: The structure follows _Domain-Driven Design_ principles by organizing code around meaningful business concepts using _Entities_, _Repositories_, and a _Ubiquitous Language_, ensuring the domain model remains expressive and independent of technical details.
+
 ## Tech Stack
 
 - **[NestJS](https://nestjs.com/):** A progressive Node.js framework for building efficient and scalable server-side applications.
@@ -85,7 +83,16 @@ This structure brings several benefits:
 - **[Passport.js](https://www.passportjs.org/):** Middleware for handling authentication, integrated with NestJS for JWT-based security.
 - **[Railway](https://railway.app/):** A cloud platform used to deploy the API and manage the MySQL database in a streamlined DevOps workflow.
 
+## Conventional Commits
 
+This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. Using this convention helps:
+- Clearly communicate the purpose of each change (e.g., `feat`, `fix`, `refactor`)
+- Enable automated tools for changelog generation, versioning, and CI/CD workflows
+- Improve collaboration and maintain a clean commit history
+
+#### Example:  
+> `feat(auth): add JWT login and token strategy`  
+> `fix(vulns): correct status enum parsing in controller`
 
 ## API Reference
 
