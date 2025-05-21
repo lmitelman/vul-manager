@@ -263,7 +263,7 @@ A live version of the API is deployed on Railway and accessible at the following
 You can use this url to interact with the service and test features like vulnerability creation, listing, and status updates.
 
 ```bash
-curl -X POST https://vul-manager.up.railway.app/vulns \
+curl -X POST https://vul-manager.up.railway.app/api/vulns \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <your-jwt-token>" \
   -d '{
