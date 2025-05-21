@@ -273,6 +273,8 @@ curl -X POST https://vul-manager.up.railway.app/vulns \
 
 A companion frontend application built with **Next.js** is available to interact with this API.
 
+> 🙏🏻 Note: The frontend was built primarily for **demonstration purposes**. While functional, it may not reflect production-level frontend practices, as frontend development **is not** my primary area of expertise.
+
 🔗 **Live App:** [https://vul-manager-frontend.up.railway.app](https://vul-manager-frontend.up.railway.app)  
 📁 **Source Code:** [github.com/lmitelman/vul-manager-frontend](https://github.com/lmitelman/vul-manager-frontend)
 
@@ -280,7 +282,7 @@ A companion frontend application built with **Next.js** is available to interact
 
 This UI provides a basic interface to authenticate and manage vulnerabilities through the API.
 
-> 🙏🏻 Note: The frontend was built primarily for demonstration purposes. While functional, it may not reflect production-level frontend practices, as frontend development is not my primary area of expertise.
+
 
 
 
